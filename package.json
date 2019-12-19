@@ -1,0 +1,25 @@
+{
+  "name": "Study_Babel7_Webpack4",
+  "version": "1.0.0",
+  "description": "Follow a Udemy course to learn Babel 7 and Webpack 4 for 2019",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amelieykw/Study_Babel7_Webpack4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amelieykw/Study_Babel7_Webpack4/issues"
+  },
+  "homepage": "https://github.com/amelieykw/Study_Babel7_Webpack4#readme",
+  "devDependencies": {
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10"
+  }
+}
