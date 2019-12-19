@@ -77,7 +77,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -90,10 +90,12 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _hello_world_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _components_hello_world_button_hello_world_button_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
+// import addImage from "./components/add-image/add-image.js/index.js";
 
-Object(_hello_world_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
+const helloWorldButton = new _components_hello_world_button_hello_world_button_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+helloWorldButton.render();
 
 /***/ }),
 /* 1 */
@@ -101,11 +103,22 @@ Object(_hello_world_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function helloWorld() {
-    console.log("Hello World");
+class HelloWorldButton {
+
+    render() {
+        const button = document.createElement('button');
+        button.innerHTML = 'Hello world';
+        const body = document.querySelector('body');
+        button.onclick = function () {
+            const p = document.createElement('p');
+            p.innerHTML = 'Hello world';
+            body.appendChild(p);
+        }
+        body.appendChild(button);
+    }
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (helloWorld);
+/* harmony default export */ __webpack_exports__["default"] = (HelloWorldButton);
 
 /***/ })
 /******/ ]);
