@@ -112,3 +112,20 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 <link rel="stylesheet" href="./dist/styles.css">
 ```
 
+# When using Babel 7 targets.node
+targets.node -- must use --> "node": "current"
+
+### 17. Extract CSS into a seperate bundle?
+**MiniCssExtractPlugin** extracts all our styles from the application and puts them inside a single css file under the dist folder.
+
+- create Heading component
+- in ``index.js``:
+```
+import Heading from './components/heading/heading.js';
+
+const heading = new Heading();
+heading.render();
+```
+- after ``npm run build`` to bundle, you can find the content of heading.css in ``dist/style.css``
+
+
