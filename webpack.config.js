@@ -1,6 +1,9 @@
+const webpack = require('webpack');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: './src/index.js',
@@ -9,7 +12,11 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         publicPath: 'dist/'
     },
-    mode: 'none',
+    mode: 'development',
+    devServer: {
+        contentBase: path.resolve(__dirname, './dist'),
+        hot: true
+    },
     module: {
         rules: [
             {
@@ -25,22 +32,22 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/env'],
-                        plugins: ['transform-class-properties']
-                    }
-                }
+                use: ['babel-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     },
     plugins: [
         new TerserPlugin(),
         new MiniCssExtractPlugin({
             filename: 'styles.css'
-        })
+        }),
+        new CleanWebpackPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({ templte: "./index.html" })
     ]
 }

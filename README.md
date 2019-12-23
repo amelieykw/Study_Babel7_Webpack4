@@ -129,3 +129,100 @@ heading.render();
 - after ``npm run build`` to bundle, you can find the content of heading.css in ``dist/style.css``
 
 
+### 18. Browser Caching
+#### Problem: Reload of same CSS and JS files each time on loading
+every time your browser loads a website, it downloads all the assets required by this Website.
+
+Each browser is different, but all of them need css and js files. 
+
+Each time the user reloads the page, their browser downloads all those files from the Internet. This may become an issue, expecially when the user loads your website on mobile devices with slow internet connection. Each time they go to a new page they need to wait several minutes until the page is ready. 
+
+#### Solution: Browser Cache
+If the file didn't change between the page reloads, your browser can save it in a specific place, called browser cache.
+
+When you open this page again browser won't donwload this file again. It will take this file from cache.
+
+This technique helps to save lots of time and traffic.
+
+##### Browser Cache Issue:
+What if you fixed a bug on your website and your js file has been changed? If the browser always takes this file from cache, your customer will never get this new version.
+
+##### Solution of Browser Cache Issue:
+1. create a new file with the new name each time you make a change.
+    - Browsers remember files by name.
+    - If the name changes, browsers will download the new version.
+    - we don't need to change the filename manually every time we change our code. This can be done automatically.
+    - in ``webpack.config.js``:
+    ```
+    output: {
+        filename: 'bundle.[contenthash].js',
+    ...
+    new MiniCssExtractPlugin({
+            filename: 'styles.[contenthash].css'
+    ```
+
+### 19. How to Clean Dist Folder Before generating new bundles?
+Each time you run the build process CleanWebpackPlugin will clean the output.path folder.
+
+- in ``webpack.config.js``:
+```
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+...
+
+    plugins: [
+        new TerserPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css'
+        }),
+        new CleanWebpackPlugin()
+...
+```
+- ``cnpm install clean-webpack-plugin --save-dev``
+- ``npm run build``
+    - CleanWebpackPlugin will remove previous generated bundle-cached files.
+
+
+
+### 20. Production mode VS Development mode
+3 kinds of mode:
+1. ``none``
+2. ``production``
+3. ``environment``
+
+#### Compare these 3 kinds:
+1. Firstly, in ``webpack.config.js``, change ``none`` to ``production``:
+```
+...
+mode: 'production'
+...
+```
+
+2. Secondly, in ``index.js``,
+```
+if (process.env.NODE_ENV === 'production') {
+    console.log('Production mode');
+} else if (process.env.NODE_ENV === 'development') {
+    console.log('Development mode');
+}
+
+// in order to test production mode
+// this will show error in browser
+helloWorldButton.methodNotExist() 
+```
+
+3. Thirdly, in browser developer tools:
+    - You can see ``Production mode``
+    - and an error
+        - since all our js files are bundled in one bundle.js file, we just see that this error comes somewhere from bundle.js
+        - if we click the error and want to see where this error comes from, it'll show the bundled js file which is very hard to figure out
+
+4. Then, in ``webpack.config.js``, change ``none`` to ``development``:
+```
+...
+mode: 'development'
+...
+```
+5. in browser developer tools:
+    - You can see ``Development mode``
+    - and an error and its location in code

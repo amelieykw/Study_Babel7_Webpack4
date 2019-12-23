@@ -12,7 +12,7 @@ class HelloWorldButton {
 
         button.onclick = function () {
             const p = document.createElement('p');
-            p.innerHTML = 'Hello world';
+            p.innerHTML = 'Hello world YKW';
             p.classList.add('hello-world-text');
             body.appendChild(p);
         }
