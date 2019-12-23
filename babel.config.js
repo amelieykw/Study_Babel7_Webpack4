@@ -1,14 +1,17 @@
 module.exports = function (api) {
     api.cache(true);
 
-    const presets = [[
+    const presets = [
         '@babel/preset-env',
-        {
-            targets: {
-                node: 'current',
-            },
-        },
-    ]];
+        [
+            "@babel/preset-react",
+            {
+                targets: {
+                    node: 'current',
+                },
+            }
+        ]
+    ];
     const plugins = ['transform-class-properties'];
 
     return {

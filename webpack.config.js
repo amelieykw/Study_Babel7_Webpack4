@@ -10,7 +10,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, './dist'),
-        publicPath: 'dist/'
+        publicPath: ''
     },
     mode: 'development',
     devServer: {
@@ -48,6 +48,8 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin({ templte: "./index.html" })
+        new HtmlWebpackPlugin({
+            title: 'Hello world'
+        })
     ]
 }
