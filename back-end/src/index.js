@@ -1,4 +1,5 @@
-import 'dotenv/config';
+// require("@babel/register");
+
 import cors from 'cors';
 import express from 'express';
 import uuidv4 from 'uuid/v4';
